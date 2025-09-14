@@ -1,0 +1,72 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+.pnpm-debug.log
+
+# Build output
+dist/
+build/
+.out/
+.next/
+.nuxt/
+.vite/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Local config
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+/debug.log
+
+# Testing
+coverage/
+jest.config.*.js
+.vitest/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Storybook
+out/
+.storybook/build/
+
+# Misc
+public/robots.txt    # if you generate robots in build; uncomment if you want to keep it tracked
+.cache/
+.cache-loader/
+
+# If using TypeScript
+*.tsbuildinfo
+
+# If using Expo / React Native
+.expo/
+.expo-shared/
+android/
+ios/
+**/build/
+*.keystore

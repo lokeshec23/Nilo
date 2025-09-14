@@ -1,0 +1,113 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Pytest
+.pytest_cache/
+.cache/
+nose2-junit.xml
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+coverage.xml
+
+# Migrations (if you want to ignore auto-generated DB migrations, else remove)
+# migrations/
+# If using Alembic / SQLAlchemy migrations, typically keep them checked in. Uncomment above only if you intentionally want them ignored.
+
+# Database files
+*.sqlite3
+*.db
+*.db-journal
+
+# Environment / secrets
+.env
+*.env
+instance/
+secrets.json
+
+# Django specific
+local_settings.py
+media/
+staticfiles/
+
+# FastAPI / Uvicorn logs
+gunicorn.log
+uvicorn.log
+
+# Logs
+*.log
+logs/
+debug.log
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+.env.*.local
+
+# Coverage / profiling
+.prof
+*.prof
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+
+# Pyre
+.pyre/
+
+# Mac/Linux temp files
+*~
+.*.swp
