@@ -1,50 +1,90 @@
 import { ReactNode } from "react";
-import { useAuth } from "@/context/AuthContext";
-import { useTheme } from "@/context/ThemeContext";
+import Header from "./Header";
+import { NavLink } from "react-router-dom";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
-  const { user, logout } = useAuth();
-  const { theme, toggleTheme } = useTheme();
+  const linkClass = ({ isActive }: { isActive: boolean }) =>
+    `btn mb-2 text-start ${isActive ? "btn-primary" : "btn-light"}`;
 
   return (
     <div className="d-flex min-vh-100">
-      {/* Sidebar */}
+      {/* Desktop Sidebar */}
       <nav
         className="d-none d-md-flex flex-column p-3 bg-body-tertiary border-end"
         style={{ width: "220px" }}
       >
         <h5 className="mb-4">Nilo</h5>
-        <a href="/dashboard" className="btn btn-light mb-2 text-start">
+        <NavLink to="/dashboard" className={linkClass}>
           Dashboard
-        </a>
-        <a href="/projects" className="btn btn-light mb-2 text-start">
+        </NavLink>
+        <NavLink to="/projects" className={linkClass}>
           Projects
-        </a>
-        <a href="/backlog" className="btn btn-light mb-2 text-start">
+        </NavLink>
+        <NavLink to="/backlog" className={linkClass}>
           Backlog
-        </a>
-        <a href="/board" className="btn btn-light mb-2 text-start">
+        </NavLink>
+        <NavLink to="/board" className={linkClass}>
           Board
-        </a>
+        </NavLink>
       </nav>
 
-      {/* Main content area */}
+      {/* Main content */}
       <div className="flex-grow-1 d-flex flex-column">
-        {/* Top bar */}
-        <header className="d-flex justify-content-between align-items-center p-2 border-bottom bg-body-tertiary">
-          <span>Welcome {user?.email}</span>
-          <div className="d-flex gap-2">
-            <button className="btn btn-outline-secondary" onClick={toggleTheme}>
-              {theme === "light" ? "Dark" : "Light"} Mode
-            </button>
-            <button className="btn btn-outline-danger" onClick={logout}>
-              Logout
-            </button>
-          </div>
-        </header>
+        {/* Header (sticky top) */}
+        <Header />
 
-        {/* Page content - flex-grow makes it stretch */}
+        {/* Page content */}
         <main className="p-3 bg-body flex-grow-1">{children}</main>
+      </div>
+
+      {/* Mobile Offcanvas Sidebar */}
+      <div
+        className="offcanvas offcanvas-start"
+        tabIndex={-1}
+        id="sidebarMenu"
+        aria-labelledby="sidebarMenuLabel"
+      >
+        <div className="offcanvas-header">
+          <h5 className="offcanvas-title" id="sidebarMenuLabel">
+            Nilo
+          </h5>
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div className="offcanvas-body d-flex flex-column">
+          <NavLink
+            to="/dashboard"
+            className={linkClass}
+            data-bs-dismiss="offcanvas"
+          >
+            Dashboard
+          </NavLink>
+          <NavLink
+            to="/projects"
+            className={linkClass}
+            data-bs-dismiss="offcanvas"
+          >
+            Projects
+          </NavLink>
+          <NavLink
+            to="/backlog"
+            className={linkClass}
+            data-bs-dismiss="offcanvas"
+          >
+            Backlog
+          </NavLink>
+          <NavLink
+            to="/board"
+            className={linkClass}
+            data-bs-dismiss="offcanvas"
+          >
+            Board
+          </NavLink>
+        </div>
       </div>
     </div>
   );

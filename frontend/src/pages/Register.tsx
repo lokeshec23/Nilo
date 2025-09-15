@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { register } from "@/api/auth";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function RegisterPage() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
@@ -11,7 +14,7 @@ export default function RegisterPage() {
     e.preventDefault();
     try {
       await register(email, fullName, password);
-      window.location.href = "/login";
+      navigate("/login"); // ✅ react-router navigation
     } catch {
       setError("Registration failed");
     }
@@ -19,8 +22,17 @@ export default function RegisterPage() {
 
   return (
     <div className="d-flex align-items-center justify-content-center vh-100 bg-body">
-      <div className="card shadow-sm p-4" style={{ width: "350px" }}>
-        <h4 className="mb-3 text-center">Register</h4>
+      <div className="card shadow-sm p-4" style={{ width: "360px" }}>
+        <div className="text-center mb-3">
+          <img
+            src="https://wac-cdn.atlassian.com/assets/img/favicons/atlassian/favicon.png"
+            alt="Nilo Logo"
+            width="40"
+            className="mb-2"
+          />
+          <h4 className="fw-bold">Sign up for Nilo</h4>
+        </div>
+
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <input
@@ -36,7 +48,7 @@ export default function RegisterPage() {
             <input
               type="email"
               className="form-control"
-              placeholder="Email"
+              placeholder="Email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -53,13 +65,19 @@ export default function RegisterPage() {
             />
           </div>
           {error && <div className="text-danger small mb-2">{error}</div>}
-          <button type="submit" className="btn btn-primary w-100">
-            Register
+          <button type="submit" className="btn btn-primary w-100 mb-3">
+            Sign up
           </button>
         </form>
-        <p className="mt-3 text-center">
-          Already have an account? <a href="/login">Login</a>
-        </p>
+
+        <div className="text-center">
+          <small>
+            Already have an account?{" "}
+            <Link to="/login" className="text-primary text-decoration-none">
+              Log in
+            </Link>
+          </small>
+        </div>
       </div>
     </div>
   );
