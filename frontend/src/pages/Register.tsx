@@ -1,8 +1,5 @@
 import { useState } from "react";
 import { register } from "@/api/auth";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -13,54 +10,57 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      debugger
       await register(email, fullName, password);
       window.location.href = "/login";
-    } catch (err: any) {
+    } catch {
       setError("Registration failed");
     }
   };
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-50">
-      <Card className="w-[350px] shadow-md">
-        <CardHeader>
-          <CardTitle>Register</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
+    <div className="d-flex align-items-center justify-content-center vh-100 bg-body">
+      <div className="card shadow-sm p-4" style={{ width: "350px" }}>
+        <h4 className="mb-3 text-center">Register</h4>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <input
               type="text"
+              className="form-control"
               placeholder="Full Name"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
             />
-            <Input
+          </div>
+          <div className="mb-3">
+            <input
               type="email"
+              className="form-control"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <Input
+          </div>
+          <div className="mb-3">
+            <input
               type="password"
+              className="form-control"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            {error && <p className="text-sm text-red-500">{error}</p>}
-            <Button type="submit" className="w-full">Register</Button>
-          </form>
-          <p className="mt-4 text-sm text-gray-500">
-            Already have an account?{" "}
-            <a href="/login" className="text-blue-600 hover:underline">
-              Login
-            </a>
-          </p>
-        </CardContent>
-      </Card>
+          </div>
+          {error && <div className="text-danger small mb-2">{error}</div>}
+          <button type="submit" className="btn btn-primary w-100">
+            Register
+          </button>
+        </form>
+        <p className="mt-3 text-center">
+          Already have an account? <a href="/login">Login</a>
+        </p>
+      </div>
     </div>
   );
 }

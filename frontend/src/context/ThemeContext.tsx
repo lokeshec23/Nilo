@@ -2,9 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
 
-const ThemeContext = createContext<
-  { theme: Theme; toggleTheme: () => void } | undefined
->(undefined);
+const ThemeContext = createContext<{ theme: Theme; toggleTheme: () => void } | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(
@@ -12,8 +10,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(theme);
+    document.documentElement.setAttribute("data-bs-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
 
@@ -28,6 +25,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 export function useTheme() {
   const ctx = useContext(ThemeContext);
-  if (!ctx) throw new Error("useTheme must be inside ThemeProvider");
+  if (!ctx) throw new Error("useTheme must be used inside ThemeProvider");
   return ctx;
 }

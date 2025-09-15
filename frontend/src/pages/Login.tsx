@@ -1,8 +1,5 @@
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Login() {
   const { login } = useAuth();
@@ -11,49 +8,49 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    debugger
     e.preventDefault();
     try {
       await login(email, password);
-      window.location.href = "/dashboard"; // redirect after login
-    } catch (err: any) {
+      window.location.href = "/dashboard";
+    } catch {
       setError("Invalid credentials");
     }
   };
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-50">
-      <Card className="w-[350px] shadow-md">
-        <CardHeader>
-          <CardTitle>Login</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
+    <div className="d-flex align-items-center justify-content-center vh-100 bg-body">
+      <div className="card shadow-sm p-4" style={{ width: "350px" }}>
+        <h4 className="mb-3 text-center">Login</h4>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <input
               type="email"
+              className="form-control"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <Input
+          </div>
+          <div className="mb-3">
+            <input
               type="password"
+              className="form-control"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            {error && <p className="text-sm text-red-500">{error}</p>}
-            <Button type="submit" className="w-full">Login</Button>
-          </form>
-          <p className="mt-4 text-sm text-gray-500">
-            Don’t have an account?{" "}
-            <a href="/register" className="text-blue-600 hover:underline">
-              Register
-            </a>
-          </p>
-        </CardContent>
-      </Card>
+          </div>
+          {error && <div className="text-danger small mb-2">{error}</div>}
+          <button type="submit" className="btn btn-primary w-100">
+            Login
+          </button>
+        </form>
+        <p className="mt-3 text-center">
+          Don’t have an account? <a href="/register">Register</a>
+        </p>
+      </div>
     </div>
   );
 }
