@@ -1,18 +1,9 @@
-import { useAuth } from "@/context/AuthContext";
+import AppLayout from "@/layouts/AppLayout";
 
 export default function Dashboard() {
-  const { user, isAuthenticated, logout } = useAuth();
-
   return (
-    <div>
-      {isAuthenticated ? (
-        <>
-          <p>Welcome, {user?.email}</p>
-          <button onClick={logout}>Logout</button>
-        </>
-      ) : (
-        <p>Please login</p>
-      )}
-    </div>
+    <AppLayout>
+      <h1 className="text-2xl font-bold">Dashboard</h1>
+    </AppLayout>
   );
 }
